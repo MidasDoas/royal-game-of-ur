@@ -85,7 +85,7 @@ def main():
 			else:
 				piece = None
 				while piece is None:
-					name = raw_input('Choose a piece to move from ' + str(moveable) + ': ')
+					name = input('Choose a piece to move from ' + str(moveable) + ': ')
 					piece = piece_from_name(moveable, name)
 
 			# Step 4: move the chosen piece (if possible) and print the board state
@@ -119,9 +119,11 @@ def main():
 				exit()
 
 			# Step 6: check if player landed on a rosette square and repeat if so
-			if new_loc.name in ['a','c','k','o','q']:
+			land = new_loc.name if new_loc else None
+			if land in ['a','c','k','o','q']:
 				rosette = True
 				print(player + ' has landed on a rosette! Taking another turn')
+			new_loc = None # you don't get another rosette if your rosette roll was a 0
 		turn += 1
 
 if __name__=='__main__':
