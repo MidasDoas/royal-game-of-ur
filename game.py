@@ -24,7 +24,8 @@ def team(piece):
 	numbers = ['1','2','3','4','5','6','7']
 	return letters if repr(piece) in letters else numbers
 
-# Returns the square n squares ahead of a given one
+# Returns the square n squares ahead of a given one sq
+# Returns None if sq is less than n away from an end zone
 def nth_successor(n, sq):
 	piece = sq.member[0] if len(sq.member) is not 0 else None
 	assert piece is not None
@@ -42,28 +43,27 @@ def can_move(n, piece):
 	if succ is None: # if you can't land exactly on an end square
 		return False
 	if succ.occupied:
-		if succ.name is 'k': # if the safe square is occupied
+		if succ.name is 'k': # or if you would land on the safe square but it's occupied
 			return False
 		else:
-			if succ.member[0].name in team(piece): # if the nth successor is occupied by your own piece
+			if succ.member[0].name in team(piece): # or if the nth successor is occupied by your own piece
 				if succ.name not in ['enda', 'end1']: # except if that square is an end square
-					return False
-	return True
+					return False # then you can't
+	return True # otherwise you can
 
-# Returns the actual Piece object given its name string, case insensitive
+# Returns the actual Piece object given its name string
 def piece_from_name(group, name):
 	for piece in group:
-		if repr(piece).lower() == name.lower():
+		if repr(piece).lower() == name.lower(): # case insensitive
 			return piece
 	return None
 
 def main():
 	board = Board()
 	print(board)
-	turn = 0
 
 	# coin flip to start
-	turn += randint(0,1)
+	turn = randint(0,1)
 	if turn:
 		print('Player 1 goes first!')
 	else:
