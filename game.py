@@ -50,7 +50,7 @@ def can_move(n, piece):
 					return False
 	return True
 
-# Returns the actual Piece object given its name string
+# Returns the actual Piece object given its name string, case insensitive
 def piece_from_name(group, name):
 	for piece in group:
 		if repr(piece).lower() == name.lower():
@@ -135,3 +135,4 @@ def main():
 
 if __name__=='__main__':
 	main()
+	
