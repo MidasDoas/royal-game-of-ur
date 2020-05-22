@@ -60,8 +60,15 @@ def piece_from_name(group, name):
 def main():
 	board = Board()
 	print(board)
-
 	turn = 0
+
+	# coin flip to start
+	turn += randint(0,1)
+	if turn:
+		print('Player 1 goes first!')
+	else:
+		print('Player A goes first!')
+
 	# enter game loop
 	while True:
 		rosette = True
